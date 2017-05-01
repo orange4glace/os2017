@@ -2,7 +2,7 @@
 
 main()
         {
-                int     n;
-                for (n=20;n<=25;n++)
-                        PrintInt(n);
+                int     k;
+                for (k=20;k<=25;k++)
+                        PrintIntTag(k, 1);
         }

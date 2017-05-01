@@ -28,6 +28,8 @@
 //	endian machine, and we're now running on a big endian machine.
 //----------------------------------------------------------------------
 
+int AddrSpace::pages_used = 0;
+
 static void 
 SwapHeader (NoffHeader *noffH)
 {
@@ -53,6 +55,7 @@ SwapHeader (NoffHeader *noffH)
 
 AddrSpace::AddrSpace()
 {
+    cout << "Address Space constructed." << endl;
     pageTable = new TranslationEntry[NumPhysPages];
     for (unsigned int i = 0; i < NumPhysPages; i++) {
 	pageTable[i].virtualPage = i;	// for now, virt page # = phys page #
@@ -63,8 +66,8 @@ AddrSpace::AddrSpace()
 	pageTable[i].use = FALSE;
 	pageTable[i].dirty = FALSE;
 	pageTable[i].readOnly = FALSE;  
-    }
-    
+}
+
     // zero out the entire address space
 //    bzero(kernel->machine->mainMemory, MemorySize);
 }
@@ -93,49 +96,57 @@ AddrSpace::~AddrSpace()
 bool 
 AddrSpace::Load(char *fileName) 
 {
+    cout << "Load " << fileName << endl;
     OpenFile *executable = kernel->fileSystem->Open(fileName);
     NoffHeader noffH;
     unsigned int size;
 
     if (executable == NULL) {
-	cerr << "Unable to open file " << fileName << "\n";
-	return FALSE;
-    }
-    executable->ReadAt((char *)&noffH, sizeof(noffH), 0);
-    if ((noffH.noffMagic != NOFFMAGIC) && 
-		(WordToHost(noffH.noffMagic) == NOFFMAGIC))
-    	SwapHeader(&noffH);
-    ASSERT(noffH.noffMagic == NOFFMAGIC);
+     cerr << "Unable to open file " << fileName << "\n";
+     return FALSE;
+ }
+ executable->ReadAt((char *)&noffH, sizeof(noffH), 0);
+ if ((noffH.noffMagic != NOFFMAGIC) && 
+  (WordToHost(noffH.noffMagic) == NOFFMAGIC))
+     SwapHeader(&noffH);
+ ASSERT(noffH.noffMagic == NOFFMAGIC);
 
 // how big is address space?
-    size = noffH.code.size + noffH.initData.size + noffH.uninitData.size 
+ size = noffH.code.size + noffH.initData.size + noffH.uninitData.size 
 			+ UserStackSize;	// we need to increase the size
 						// to leave room for the stack
-    numPages = divRoundUp(size, PageSize);
+            numPages = divRoundUp(size, PageSize);
 //	cout << "number of pages of " << fileName<< " is "<<numPages<<endl;
-    size = numPages * PageSize;
+            size = numPages * PageSize;
 
     ASSERT(numPages <= NumPhysPages);		// check we're not trying
 						// to run anything too big --
 						// at least until we have
 						// virtual memory
 
+    ASSERT(numPages + AddrSpace::pages_used <= NumPhysPages);
+
+    int start_of_physical_addr = AddrSpace::pages_used * PageSize;
+    for (int i = 0; i < numPages; i ++) {
+        pageTable[i].physicalPage = AddrSpace::pages_used++;
+    }
+
     DEBUG(dbgAddr, "Initializing address space: " << numPages << ", " << size);
 
 // then, copy in the code and data segments into memory
-	if (noffH.code.size > 0) {
+    if (noffH.code.size > 0) {
         DEBUG(dbgAddr, "Initializing code segment.");
-	DEBUG(dbgAddr, noffH.code.virtualAddr << ", " << noffH.code.size);
-        	executable->ReadAt(
-		&(kernel->machine->mainMemory[noffH.code.virtualAddr]), 
-			noffH.code.size, noffH.code.inFileAddr);
-    }
-	if (noffH.initData.size > 0) {
-        DEBUG(dbgAddr, "Initializing data segment.");
-	DEBUG(dbgAddr, noffH.initData.virtualAddr << ", " << noffH.initData.size);
+        DEBUG(dbgAddr, start_of_physical_addr << ", " << noffH.code.size);
         executable->ReadAt(
-		&(kernel->machine->mainMemory[noffH.initData.virtualAddr]),
-			noffH.initData.size, noffH.initData.inFileAddr);
+          &(kernel->machine->mainMemory[start_of_physical_addr]), 
+          noffH.code.size, noffH.code.inFileAddr);
+    }
+    if (noffH.initData.size > 0) {
+        DEBUG(dbgAddr, "Initializing data segment.");
+        DEBUG(dbgAddr, noffH.initData.virtualAddr << ", " << noffH.initData.size);
+        executable->ReadAt(
+          &(kernel->machine->mainMemory[noffH.initData.virtualAddr]),
+          noffH.initData.size, noffH.initData.inFileAddr);
     }
 
     delete executable;			// close file
@@ -154,8 +165,8 @@ void
 AddrSpace::Execute(char *fileName) 
 {
     if (!Load(fileName)) {
-	cout << "inside !Load(FileName)" << endl;
-	return;				// executable not found
+        cout << "inside !Load(FileName)" << endl;
+	   return;				// executable not found
     }
 
     //kernel->currentThread->space = this;
@@ -187,20 +198,20 @@ AddrSpace::InitRegisters()
     int i;
 
     for (i = 0; i < NumTotalRegs; i++)
-	machine->WriteRegister(i, 0);
+     machine->WriteRegister(i, 0);
 
     // Initial program counter -- must be location of "Start"
-    machine->WriteRegister(PCReg, 0);	
+ machine->WriteRegister(PCReg, 0);	
 
     // Need to also tell MIPS where next instruction is, because
     // of branch delay possibility
-    machine->WriteRegister(NextPCReg, 4);
+ machine->WriteRegister(NextPCReg, 4);
 
    // Set the stack register to the end of the address space, where we
    // allocated the stack; but subtract off a bit, to make sure we don't
    // accidentally reference off the end!
-    machine->WriteRegister(StackReg, numPages * PageSize - 16);
-    DEBUG(dbgAddr, "Initializing stack pointer: " << numPages * PageSize - 16);
+ machine->WriteRegister(StackReg, numPages * PageSize - 16);
+ DEBUG(dbgAddr, "Initializing stack pointer: " << numPages * PageSize - 16);
 }
 
 //----------------------------------------------------------------------
@@ -213,8 +224,8 @@ AddrSpace::InitRegisters()
 
 void AddrSpace::SaveState() 
 {
-        pageTable=kernel->machine->pageTable;
-        numPages=kernel->machine->pageTableSize;
+    pageTable=kernel->machine->pageTable;
+    numPages=kernel->machine->pageTableSize;
 }
 
 //----------------------------------------------------------------------

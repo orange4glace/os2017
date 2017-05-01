@@ -24,6 +24,8 @@ class AddrSpace {
     AddrSpace();			// Create an address space.
     ~AddrSpace();			// De-allocate an address space
 
+    static int pages_used;
+
     void Execute(char *fileName);	// Run the the program
 					// stored in the file "executable"
 

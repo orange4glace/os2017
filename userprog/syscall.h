@@ -30,6 +30,7 @@
 #define SC_ThreadFork	9
 #define SC_ThreadYield	10
 #define SC_PrintInt	11
+#define SC_PrintInt_Tag	12
 
 #ifndef IN_ASM
 
@@ -128,6 +129,8 @@ void ThreadFork(void (*func)());
 void ThreadYield();		
 
 void PrintInt(int number);	//my System Call
+
+void PrintIntTag(int number, int tag);	//my System Call
 #endif /* IN_ASM */
 
 #endif /* SYSCALL_H */

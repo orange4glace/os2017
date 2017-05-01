@@ -53,6 +53,7 @@ ExceptionHandler(ExceptionType which)
 {
 	int	type = kernel->machine->ReadRegister(2);
 	int	val;
+	int tag;
 
     switch (which) {
 	case SyscallException:
@@ -63,7 +64,12 @@ ExceptionHandler(ExceptionType which)
 		    break;
 		case SC_PrintInt:
 			val=kernel->machine->ReadRegister(4);
-			cout << "Print integer:" <<val << endl;
+			cout << "Print integer:" << val << endl;
+			return;
+		case SC_PrintInt_Tag:
+			val=kernel->machine->ReadRegister(4);
+			tag=kernel->machine->ReadRegister(5);
+			cout << "(" << tag << ") Print integer:" << val << endl;
 			return;
 /*		case SC_Exec:
 			DEBUG(dbgAddr, "Exec\n");

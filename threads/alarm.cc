@@ -49,15 +49,24 @@ Alarm::Alarm(bool doRandom)
 void 
 Alarm::CallBack() 
 {
+    bool isSleepListEmpty = kernel->scheduler->IsSleepListEmpty();
+    kernel->scheduler->AlramTicks();
+
     Interrupt *interrupt = kernel->interrupt;
     MachineStatus status = interrupt->getStatus();
     
-    if (status == IdleMode) {	// is it time to quit?
+    if (status == IdleMode && isSleepListEmpty) {	// is it time to quit?
         if (!interrupt->AnyFutureInterrupts()) {
-	    timer->Disable();	// turn off the timer
-	}
+	       timer->Disable();	// turn off the timer
+	   }
     } else {			// there's someone to preempt
-	interrupt->YieldOnReturn();
+        if (kernel->scheduler->GetSchedulerType() == SJF) return;
+	    interrupt->YieldOnReturn();
     }
 }
 
+void
+Alarm::WaitUntil(int time)
+{
+    kernel->scheduler->SetSleep(time);
+}

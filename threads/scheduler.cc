@@ -33,6 +33,7 @@ Scheduler::Scheduler()
 {
 //	schedulerType = type;
 	readyList = new List<Thread *>; 
+    sleepList = new List<SleepThread>;
 	toBeDestroyed = NULL;
 } 
 
@@ -44,6 +45,7 @@ Scheduler::Scheduler()
 Scheduler::~Scheduler()
 { 
     delete readyList; 
+    delete sleepList;
 } 
 
 //----------------------------------------------------------------------
@@ -183,4 +185,44 @@ Scheduler::Print()
 {
     cout << "Ready list contents:\n";
     readyList->Apply(ThreadPrint);
+}
+
+void
+Scheduler::SetSleep(int time)
+{
+    kernel->interrupte->SetLevel(IntOff);
+    Thread* thread = kernel->currentThread;
+
+    sleepList->Insert(SleepThread(thread, time));
+    thread->Sleep(FALSE);
+    kernel->interrupt->SetLevel(IntOn);
+}
+
+SchedulerType
+Scheduler::GetSchedulerType()
+{
+    return schedulerType;
+}
+
+void
+Scheduler::AlramTicks()
+{
+    ListIterator<SleepThread> iter(sleepList);
+    for (; !iter.IsDone(); iter.Next()) {
+        iter.Item().consume(1);
+    }
+    while (!sleepList->IsEmpty()) {
+        SleepThread st = sleepList->Front();
+        if (st.GetSleepTime() == 0) {
+            ReadyToRun(st.GetThread());
+            sleepList->RemoveFront();
+        }
+        else break;
+    }
+}
+
+bool
+Scheduler::IsSleepListEmpty()
+{
+    return sleepList.IsEmpty();
 }

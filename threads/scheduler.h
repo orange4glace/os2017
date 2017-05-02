@@ -12,6 +12,7 @@
 #include "copyright.h"
 #include "list.h"
 #include "thread.h"
+#include "sleep_thread.h"
 
 // The following class defines the scheduler/dispatcher abstraction -- 
 // the data structures and operations needed to keep track of which 
@@ -37,7 +38,15 @@ class Scheduler {
 	void CheckToBeDestroyed();	// Check if thread that had been
     					// running needs to be deleted
 	void Print();			// Print contents of ready list
+
+	void SetSleep(int time);
     
+	SchedulerType GetSchedulerType();
+
+	void AlramTicks();
+
+	bool IsSleepListEmpty();
+
     // SelfTest for scheduler is implemented in class Thread
     
   private:
@@ -46,6 +55,7 @@ class Scheduler {
 					// but not running
 	Thread *toBeDestroyed;		// finishing thread to be destroyed
     					// by the next thread that runs
+	List<SleepThread> *sleepList;
 };
 
 #endif // SCHEDULER_H

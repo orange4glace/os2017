@@ -49,13 +49,9 @@ int sleepCompare(SleepThread* a, SleepThread* b) {
 Scheduler::Scheduler(SchedulerType type)
 {
 	schedulerType = type;
-	readyList = new List<Thread *>;
+    readyList = new SortedList<Thread *> (burstCompare);
     sleepList = new SortedList<SleepThread *> (sleepCompare);
-    if (schedulerType == SJF) {
-        delete readyList;
-        burstTimeMap = new map<Thread*, int>;
-        readyList = new SortedList<Thread *> (burstCompare);
-    }
+    burstTimeMap = new map<Thread*, int>;
     prevTicks = 0;
 	toBeDestroyed = NULL;
 } 
@@ -92,7 +88,7 @@ Scheduler::ReadyToRun (Thread *thread)
     }
 
     thread->setStatus(READY);
-    readyList->Append(thread);
+    readyList->Insert(thread);
 }
 
 //----------------------------------------------------------------------

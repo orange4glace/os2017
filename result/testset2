@@ -1,0 +1,213 @@
+ubuntu@ubuntu:~/os2017/userprog$ ./nachos -e ../test/sjf_test4 -e ../test/sjf_test5 -e ../test/sjf_test6
+Total threads number is 3
+Address Space constructed.
+Thread ../test/sjf_test4 is executing.
+Address Space constructed.
+Thread ../test/sjf_test5 is executing.
+Address Space constructed.
+Thread ../test/sjf_test6 is executing.
+Load ../test/sjf_test4
+Print integer:0
+
+Thread ../test/sjf_test4
+prevBurst:	0
+actualBurst:	739
+estiBurst:	221
+
+Load ../test/sjf_test5
+Print integer:100
+
+Thread ../test/sjf_test5
+prevBurst:	0
+actualBurst:	7040
+estiBurst:	2111
+
+Load ../test/sjf_test6
+Print integer:100
+
+Thread ../test/sjf_test6
+prevBurst:	0
+actualBurst:	35040
+estiBurst:	10511
+
+Print integer:10
+
+Thread ../test/sjf_test4
+prevBurst:	221
+actualBurst:	736
+estiBurst:	375
+
+Print integer:110
+
+Thread ../test/sjf_test5
+prevBurst:	2111
+actualBurst:	7037
+estiBurst:	3588
+
+Print integer:20
+
+Thread ../test/sjf_test4
+prevBurst:	375
+actualBurst:	736
+estiBurst:	483
+
+Print integer:120
+
+Thread ../test/sjf_test5
+prevBurst:	3588
+actualBurst:	7037
+estiBurst:	4622
+
+Print integer:30
+
+Thread ../test/sjf_test4
+prevBurst:	483
+actualBurst:	736
+estiBurst:	558
+
+Print integer:130
+
+Thread ../test/sjf_test5
+prevBurst:	4622
+actualBurst:	7037
+estiBurst:	5346
+
+Print integer:40
+
+Thread ../test/sjf_test4
+prevBurst:	558
+actualBurst:	736
+estiBurst:	611
+
+Print integer:140
+
+Thread ../test/sjf_test5
+prevBurst:	5346
+actualBurst:	7037
+estiBurst:	5853
+
+Print integer:50
+
+Thread ../test/sjf_test4
+prevBurst:	611
+actualBurst:	736
+estiBurst:	648
+
+Print integer:150
+
+Thread ../test/sjf_test5
+prevBurst:	5853
+actualBurst:	7037
+estiBurst:	6208
+
+Print integer:60
+
+Thread ../test/sjf_test4
+prevBurst:	648
+actualBurst:	736
+estiBurst:	674
+
+Print integer:160
+
+Thread ../test/sjf_test5
+prevBurst:	6208
+actualBurst:	7037
+estiBurst:	6456
+
+Print integer:70
+
+Thread ../test/sjf_test4
+prevBurst:	674
+actualBurst:	736
+estiBurst:	692
+
+Print integer:170
+
+Thread ../test/sjf_test5
+prevBurst:	6456
+actualBurst:	7037
+estiBurst:	6630
+
+Print integer:80
+
+Thread ../test/sjf_test4
+prevBurst:	692
+actualBurst:	736
+estiBurst:	705
+
+Print integer:180
+
+Thread ../test/sjf_test5
+prevBurst:	6630
+actualBurst:	7037
+estiBurst:	6752
+
+return value:0
+Print integer:110
+
+Thread ../test/sjf_test6
+prevBurst:	10511
+actualBurst:	35060
+estiBurst:	17875
+
+return value:0
+Print integer:120
+
+Thread ../test/sjf_test6
+prevBurst:	17875
+actualBurst:	35060
+estiBurst:	23030
+
+Print integer:130
+
+Thread ../test/sjf_test6
+prevBurst:	23030
+actualBurst:	35037
+estiBurst:	26632
+
+Print integer:140
+
+Thread ../test/sjf_test6
+prevBurst:	26632
+actualBurst:	35037
+estiBurst:	29153
+
+Print integer:150
+
+Thread ../test/sjf_test6
+prevBurst:	29153
+actualBurst:	35037
+estiBurst:	30918
+
+Print integer:160
+
+Thread ../test/sjf_test6
+prevBurst:	30918
+actualBurst:	35037
+estiBurst:	32153
+
+Print integer:170
+
+Thread ../test/sjf_test6
+prevBurst:	32153
+actualBurst:	35037
+estiBurst:	33018
+
+Print integer:180
+
+Thread ../test/sjf_test6
+prevBurst:	33018
+actualBurst:	35037
+estiBurst:	33623
+
+return value:0
+No threads ready or runnable, and no pending interrupts.
+Assuming the program completed.
+Machine halting!
+
+Ticks: total 386203, idle 495, system 340, user 385368
+Disk I/O: reads 0, writes 0
+Console I/O: reads 0, writes 0
+Paging: faults 0
+Network I/O: packets received 0, sent 0
+ubuntu@ubuntu:~/os2017/userprog$ 

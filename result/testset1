@@ -1,0 +1,321 @@
+ubuntu@ubuntu:~/os2017/userprog$ ./nachos -e ../test/sjf_test1 -e ../test/sjf_test2 -e ../test/sjf_test3
+Total threads number is 3
+Address Space constructed.
+Thread ../test/sjf_test1 is executing.
+Address Space constructed.
+Thread ../test/sjf_test2 is executing.
+Address Space constructed.
+Thread ../test/sjf_test3 is executing.
+Load ../test/sjf_test1
+Print integer:100
+Print integer:101
+Print integer:102
+Print integer:103
+Print integer:104
+
+Thread ../test/sjf_test1
+prevBurst:	0
+actualBurst:	156
+estiBurst:	46
+
+Load ../test/sjf_test2
+Print integer:200
+Print integer:201
+Print integer:202
+Print integer:203
+Print integer:204
+Print integer:205
+Print integer:206
+Print integer:207
+Print integer:208
+
+Thread ../test/sjf_test2
+prevBurst:	0
+actualBurst:	260
+estiBurst:	77
+
+Load ../test/sjf_test3
+Print integer:300
+
+Thread ../test/sjf_test3
+prevBurst:	0
+actualBurst:	31
+estiBurst:	9
+
+Print integer:110
+Print integer:111
+Print integer:112
+Print integer:113
+Print integer:114
+
+Thread ../test/sjf_test1
+prevBurst:	46
+actualBurst:	154
+estiBurst:	78
+
+Print integer:310
+
+Thread ../test/sjf_test3
+prevBurst:	9
+actualBurst:	29
+estiBurst:	14
+
+Print integer:210
+Print integer:211
+Print integer:212
+Print integer:213
+Print integer:214
+Print integer:215
+Print integer:216
+Print integer:217
+Print integer:218
+
+Thread ../test/sjf_test2
+prevBurst:	77
+actualBurst:	258
+estiBurst:	131
+
+Print integer:320
+
+Thread ../test/sjf_test3
+prevBurst:	14
+actualBurst:	29
+estiBurst:	18
+
+Print integer:120
+Print integer:121
+Print integer:122
+Print integer:123
+Print integer:124
+
+Thread ../test/sjf_test1
+prevBurst:	78
+actualBurst:	154
+estiBurst:	100
+
+Print integer:330
+
+Thread ../test/sjf_test3
+prevBurst:	18
+actualBurst:	29
+estiBurst:	21
+
+Print integer:130
+Print integer:131
+Print integer:132
+Print integer:133
+Print integer:134
+
+Thread ../test/sjf_test1
+prevBurst:	100
+actualBurst:	154
+estiBurst:	116
+
+Print integer:340
+
+Thread ../test/sjf_test3
+prevBurst:	21
+actualBurst:	29
+estiBurst:	23
+
+Print integer:140
+Print integer:141
+Print integer:142
+Print integer:143
+Print integer:144
+
+Thread ../test/sjf_test1
+prevBurst:	116
+actualBurst:	154
+estiBurst:	127
+
+Print integer:350
+
+Thread ../test/sjf_test3
+prevBurst:	23
+actualBurst:	29
+estiBurst:	24
+
+Print integer:150
+Print integer:151
+Print integer:152
+Print integer:153
+Print integer:154
+
+Thread ../test/sjf_test1
+prevBurst:	127
+actualBurst:	154
+estiBurst:	135
+
+Print integer:360
+
+Thread ../test/sjf_test3
+prevBurst:	24
+actualBurst:	29
+estiBurst:	25
+
+Print integer:220
+Print integer:221
+Print integer:222
+Print integer:223
+Print integer:224
+Print integer:225
+Print integer:226
+Print integer:227
+Print integer:228
+
+Thread ../test/sjf_test2
+prevBurst:	131
+actualBurst:	258
+estiBurst:	169
+
+Print integer:370
+
+Thread ../test/sjf_test3
+prevBurst:	25
+actualBurst:	29
+estiBurst:	26
+
+Print integer:160
+Print integer:161
+Print integer:162
+Print integer:163
+Print integer:164
+
+Thread ../test/sjf_test1
+prevBurst:	135
+actualBurst:	154
+estiBurst:	140
+
+Print integer:380
+
+Thread ../test/sjf_test3
+prevBurst:	26
+actualBurst:	29
+estiBurst:	26
+
+Print integer:170
+Print integer:171
+Print integer:172
+Print integer:173
+Print integer:174
+
+Thread ../test/sjf_test1
+prevBurst:	140
+actualBurst:	154
+estiBurst:	144
+
+return value:0
+Print integer:180
+Print integer:181
+Print integer:182
+Print integer:183
+Print integer:184
+
+Thread ../test/sjf_test1
+prevBurst:	144
+actualBurst:	177
+estiBurst:	153
+
+Print integer:230
+Print integer:231
+Print integer:232
+Print integer:233
+Print integer:234
+Print integer:235
+Print integer:236
+Print integer:237
+Print integer:238
+
+Thread ../test/sjf_test2
+prevBurst:	169
+actualBurst:	258
+estiBurst:	195
+
+return value:0
+Print integer:240
+Print integer:241
+Print integer:242
+Print integer:243
+Print integer:244
+Print integer:245
+Print integer:246
+Print integer:247
+Print integer:248
+
+Thread ../test/sjf_test2
+prevBurst:	195
+actualBurst:	281
+estiBurst:	220
+
+Print integer:250
+Print integer:251
+Print integer:252
+Print integer:253
+Print integer:254
+Print integer:255
+Print integer:256
+Print integer:257
+Print integer:258
+
+Thread ../test/sjf_test2
+prevBurst:	220
+actualBurst:	258
+estiBurst:	231
+
+Print integer:260
+Print integer:261
+Print integer:262
+Print integer:263
+Print integer:264
+Print integer:265
+Print integer:266
+Print integer:267
+Print integer:268
+
+Thread ../test/sjf_test2
+prevBurst:	231
+actualBurst:	258
+estiBurst:	239
+
+Print integer:270
+Print integer:271
+Print integer:272
+Print integer:273
+Print integer:274
+Print integer:275
+Print integer:276
+Print integer:277
+Print integer:278
+
+Thread ../test/sjf_test2
+prevBurst:	239
+actualBurst:	258
+estiBurst:	244
+
+Print integer:280
+Print integer:281
+Print integer:282
+Print integer:283
+Print integer:284
+Print integer:285
+Print integer:286
+Print integer:287
+Print integer:288
+
+Thread ../test/sjf_test2
+prevBurst:	244
+actualBurst:	258
+estiBurst:	248
+
+return value:0
+No threads ready or runnable, and no pending interrupts.
+Assuming the program completed.
+Machine halting!
+
+Ticks: total 4623, idle 239, system 340, user 4044
+Disk I/O: reads 0, writes 0
+Console I/O: reads 0, writes 0
+Paging: faults 0
+Network I/O: packets received 0, sent 0
+ubuntu@ubuntu:~/os2017/userprog$ 

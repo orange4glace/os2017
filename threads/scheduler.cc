@@ -23,17 +23,40 @@
 #include "scheduler.h"
 #include "main.h"
 
+int burstCompare(Thread* a, Thread* b)
+{
+    int aTime = (*(kernel->scheduler->burstTimeMap))[a];
+    int bTime = (*(kernel->scheduler->burstTimeMap))[b];
+    if(aTime == bTime) { return 0; }
+    if(aTime > bTime) { return 1; }
+    if(aTime < bTime) { return -1; }
+}
+
+int sleepCompare(SleepThread* a, SleepThread* b) {
+    int aTime = a->GetSleepTime();
+    int bTime = b->GetSleepTime();
+    if(aTime == bTime) { return 0; }
+    if(aTime > bTime) { return 1; }
+    if(aTime < bTime) { return -1; }
+}
+
 //----------------------------------------------------------------------
 // Scheduler::Scheduler
 // 	Initialize the list of ready but not running threads.
 //	Initially, no ready threads.
 //----------------------------------------------------------------------
 
-Scheduler::Scheduler()
+Scheduler::Scheduler(SchedulerType type)
 {
-//	schedulerType = type;
-	readyList = new List<Thread *>; 
-    sleepList = new List<SleepThread>;
+	schedulerType = type;
+	readyList = new List<Thread *>;
+    sleepList = new SortedList<SleepThread *> (sleepCompare);
+    if (schedulerType == SJF) {
+        delete readyList;
+        burstTimeMap = new map<Thread*, int>;
+        readyList = new SortedList<Thread *> (burstCompare);
+    }
+    prevTicks = 0;
 	toBeDestroyed = NULL;
 } 
 
@@ -61,6 +84,12 @@ Scheduler::ReadyToRun (Thread *thread)
 {
     ASSERT(kernel->interrupt->getLevel() == IntOff);
     DEBUG(dbgThread, "Putting thread on ready list: " << thread->getName());
+
+    if (schedulerType == SJF) {
+        if (burstTimeMap->find(thread) == burstTimeMap->end()) {
+            (*burstTimeMap)[thread] = 0;
+        }
+    }
 
     thread->setStatus(READY);
     readyList->Append(thread);
@@ -190,10 +219,25 @@ Scheduler::Print()
 void
 Scheduler::SetSleep(int time)
 {
-    kernel->interrupte->SetLevel(IntOff);
+    kernel->interrupt->SetLevel(IntOff);
     Thread* thread = kernel->currentThread;
 
-    sleepList->Insert(SleepThread(thread, time));
+    if (schedulerType == SJF) {
+        ASSERT(burstTimeMap->find(thread) != burstTimeMap->end());
+
+        int prevBurst = (*burstTimeMap)[thread];
+        int actualBurst = kernel->stats->userTicks - prevTicks;
+        double RATE = 0.3;
+        int estiBurst = (int) (actualBurst * RATE + prevBurst * (1 - RATE));
+        (*burstTimeMap)[thread] = estiBurst;
+        prevTicks = kernel->stats->userTicks;
+        cout << "\nThread " << thread->getName() 
+             << "\nprevBurst:\t" << prevBurst
+             << "\nactualBurst:\t" << actualBurst
+             << "\nestiBurst:\t"   << estiBurst << endl << endl;
+    }
+
+    sleepList->Insert(new SleepThread(thread, time));
     thread->Sleep(FALSE);
     kernel->interrupt->SetLevel(IntOn);
 }
@@ -207,15 +251,16 @@ Scheduler::GetSchedulerType()
 void
 Scheduler::AlramTicks()
 {
-    ListIterator<SleepThread> iter(sleepList);
+    ListIterator<SleepThread *> iter(sleepList);
     for (; !iter.IsDone(); iter.Next()) {
-        iter.Item().consume(1);
+        iter.Item()->Consume(1);
     }
     while (!sleepList->IsEmpty()) {
-        SleepThread st = sleepList->Front();
-        if (st.GetSleepTime() == 0) {
-            ReadyToRun(st.GetThread());
-            sleepList->RemoveFront();
+        SleepThread* st = sleepList->Front();
+        if (st->GetSleepTime() == 0) {
+            ReadyToRun(st->GetThread());
+            SleepThread* rm = sleepList->RemoveFront();
+            delete rm;
         }
         else break;
     }
@@ -224,5 +269,5 @@ Scheduler::AlramTicks()
 bool
 Scheduler::IsSleepListEmpty()
 {
-    return sleepList.IsEmpty();
+    return sleepList->IsEmpty();
 }

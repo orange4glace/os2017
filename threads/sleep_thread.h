@@ -10,9 +10,11 @@ private:
 	int sleepTime;
 
 public:
+	SleepThread(Thread* t, int time);
+
 	Thread* GetThread();
 	int GetSleepTime();
-
+	void Consume(int time);
 };
 
 #endif

@@ -13,6 +13,7 @@
 #include "list.h"
 #include "thread.h"
 #include "sleep_thread.h"
+#include <map>
 
 // The following class defines the scheduler/dispatcher abstraction -- 
 // the data structures and operations needed to keep track of which 
@@ -26,7 +27,7 @@ enum SchedulerType {
 
 class Scheduler {
   public:
-	Scheduler();		// Initialize list of ready threads 
+	Scheduler(SchedulerType type);		// Initialize list of ready threads 
 	~Scheduler();				// De-allocate ready list
 
 	void ReadyToRun(Thread* thread);	
@@ -47,6 +48,8 @@ class Scheduler {
 
 	bool IsSleepListEmpty();
 
+	std::map<Thread*, int> *burstTimeMap;
+
     // SelfTest for scheduler is implemented in class Thread
     
   private:
@@ -55,7 +58,9 @@ class Scheduler {
 					// but not running
 	Thread *toBeDestroyed;		// finishing thread to be destroyed
     					// by the next thread that runs
-	List<SleepThread> *sleepList;
+	SortedList<SleepThread *> *sleepList;
+
+	int prevTicks;
 };
 
 #endif // SCHEDULER_H

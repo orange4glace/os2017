@@ -76,3 +76,14 @@ test2: test2.o start.o
 	$(LD) $(LDFLAGS) start.o test2.o -o test2.coff
 	../bin/coff2noff test2.coff test2
 
+sjf_test1: sjf_test1.o start.o
+	$(LD) $(LDFLAGS) start.o sjf_test1.o -o sjf_test1.coff
+	../bin/coff2noff sjf_test1.coff sjf_test1
+
+sjf_test2: sjf_test2.o start.o
+	$(LD) $(LDFLAGS) start.o sjf_test2.o -o sjf_test2.coff
+	../bin/coff2noff sjf_test2.coff sjf_test2
+
+sjf_test3: sjf_test3.o start.o
+	$(LD) $(LDFLAGS) start.o sjf_test3.o -o sjf_test3.coff
+	../bin/coff2noff sjf_test3.coff sjf_test3

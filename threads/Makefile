@@ -481,7 +481,10 @@ interrupt.o: ../machine/interrupt.cc /usr/include/stdc-predef.h \
  /usr/include/i386-linux-gnu/bits/sys_errlist.h /usr/include/string.h \
  ../lib/list.cc ../machine/callback.h ../threads/main.h ../lib/debug.h \
  ../threads/kernel.h ../lib/utility.h ../threads/thread.h ../lib/sysdep.h \
- ../threads/scheduler.h ../threads/sleep_thread.h ../machine/interrupt.h \
+ ../threads/scheduler.h ../threads/sleep_thread.h \
+ /usr/include/c++/4.8/map /usr/include/c++/4.8/bits/stl_tree.h \
+ /usr/include/c++/4.8/bits/stl_map.h \
+ /usr/include/c++/4.8/bits/stl_multimap.h ../machine/interrupt.h \
  ../machine/stats.h ../threads/alarm.h ../machine/callback.h \
  ../machine/timer.h
 stats.o: ../machine/stats.cc /usr/include/stdc-predef.h \
@@ -661,8 +664,11 @@ timer.o: ../machine/timer.cc /usr/include/stdc-predef.h \
  /usr/include/i386-linux-gnu/bits/sys_errlist.h /usr/include/string.h \
  ../threads/kernel.h ../threads/thread.h ../lib/sysdep.h \
  ../threads/scheduler.h ../lib/list.h ../lib/debug.h ../lib/list.cc \
- ../threads/sleep_thread.h ../machine/interrupt.h ../machine/stats.h \
- ../threads/alarm.h ../machine/callback.h ../machine/timer.h
+ ../threads/sleep_thread.h /usr/include/c++/4.8/map \
+ /usr/include/c++/4.8/bits/stl_tree.h /usr/include/c++/4.8/bits/stl_map.h \
+ /usr/include/c++/4.8/bits/stl_multimap.h ../machine/interrupt.h \
+ ../machine/stats.h ../threads/alarm.h ../machine/callback.h \
+ ../machine/timer.h
 alarm.o: ../threads/alarm.cc /usr/include/stdc-predef.h \
  ../lib/copyright.h ../threads/alarm.h ../lib/utility.h \
  ../lib/copyright.h ../machine/callback.h ../machine/timer.h \
@@ -753,7 +759,10 @@ alarm.o: ../threads/alarm.cc /usr/include/stdc-predef.h \
  /usr/include/i386-linux-gnu/bits/sys_errlist.h /usr/include/string.h \
  ../threads/kernel.h ../threads/thread.h ../lib/sysdep.h \
  ../threads/scheduler.h ../lib/list.h ../lib/debug.h ../lib/list.cc \
- ../threads/sleep_thread.h ../machine/interrupt.h ../machine/stats.h
+ ../threads/sleep_thread.h /usr/include/c++/4.8/map \
+ /usr/include/c++/4.8/bits/stl_tree.h /usr/include/c++/4.8/bits/stl_map.h \
+ /usr/include/c++/4.8/bits/stl_multimap.h ../machine/interrupt.h \
+ ../machine/stats.h
 kernel.o: ../threads/kernel.cc /usr/include/stdc-predef.h \
  ../lib/copyright.h ../lib/debug.h ../lib/copyright.h ../lib/utility.h \
  ../lib/sysdep.h /usr/include/c++/4.8/iostream \
@@ -843,11 +852,14 @@ kernel.o: ../threads/kernel.cc /usr/include/stdc-predef.h \
  ../threads/main.h ../threads/kernel.h ../lib/utility.h \
  ../threads/thread.h ../lib/sysdep.h ../threads/scheduler.h ../lib/list.h \
  ../lib/debug.h ../lib/list.cc ../threads/sleep_thread.h \
- ../machine/interrupt.h ../machine/callback.h ../machine/stats.h \
- ../threads/alarm.h ../machine/callback.h ../machine/timer.h \
- ../threads/synch.h ../threads/synchlist.h ../threads/synchlist.cc \
- ../lib/libtest.h ../machine/elevatortest.h ../threads/dllist_driver.h \
- ../threads/dllist.h ../threads/dll_element.h
+ /usr/include/c++/4.8/map /usr/include/c++/4.8/bits/stl_tree.h \
+ /usr/include/c++/4.8/bits/stl_map.h \
+ /usr/include/c++/4.8/bits/stl_multimap.h ../machine/interrupt.h \
+ ../machine/callback.h ../machine/stats.h ../threads/alarm.h \
+ ../machine/callback.h ../machine/timer.h ../threads/synch.h \
+ ../threads/synchlist.h ../threads/synchlist.cc ../lib/libtest.h \
+ ../machine/elevatortest.h ../threads/dllist_driver.h ../threads/dllist.h \
+ ../threads/dll_element.h
 main.o: ../threads/main.cc /usr/include/stdc-predef.h ../lib/copyright.h \
  ../threads/main.h ../lib/debug.h ../lib/copyright.h ../lib/utility.h \
  ../lib/sysdep.h /usr/include/c++/4.8/iostream \
@@ -936,10 +948,12 @@ main.o: ../threads/main.cc /usr/include/stdc-predef.h ../lib/copyright.h \
  /usr/include/i386-linux-gnu/bits/sys_errlist.h /usr/include/string.h \
  ../threads/kernel.h ../lib/utility.h ../threads/thread.h ../lib/sysdep.h \
  ../threads/scheduler.h ../lib/list.h ../lib/debug.h ../lib/list.cc \
- ../threads/sleep_thread.h ../machine/interrupt.h ../machine/callback.h \
- ../machine/stats.h ../threads/alarm.h ../machine/callback.h \
- ../machine/timer.h ../threads/dllist_driver.h ../threads/dllist.h \
- ../threads/dll_element.h
+ ../threads/sleep_thread.h /usr/include/c++/4.8/map \
+ /usr/include/c++/4.8/bits/stl_tree.h /usr/include/c++/4.8/bits/stl_map.h \
+ /usr/include/c++/4.8/bits/stl_multimap.h ../machine/interrupt.h \
+ ../machine/callback.h ../machine/stats.h ../threads/alarm.h \
+ ../machine/callback.h ../machine/timer.h ../threads/dllist_driver.h \
+ ../threads/dllist.h ../threads/dll_element.h
 scheduler.o: ../threads/scheduler.cc /usr/include/stdc-predef.h \
  ../lib/copyright.h ../lib/debug.h ../lib/copyright.h ../lib/utility.h \
  ../lib/sysdep.h /usr/include/c++/4.8/iostream \
@@ -1028,9 +1042,12 @@ scheduler.o: ../threads/scheduler.cc /usr/include/stdc-predef.h \
  /usr/include/i386-linux-gnu/bits/sys_errlist.h /usr/include/string.h \
  ../threads/scheduler.h ../lib/list.h ../lib/debug.h ../lib/list.cc \
  ../threads/thread.h ../lib/utility.h ../lib/sysdep.h \
- ../threads/sleep_thread.h ../threads/main.h ../threads/kernel.h \
- ../machine/interrupt.h ../machine/callback.h ../machine/stats.h \
- ../threads/alarm.h ../machine/callback.h ../machine/timer.h
+ ../threads/sleep_thread.h /usr/include/c++/4.8/map \
+ /usr/include/c++/4.8/bits/stl_tree.h /usr/include/c++/4.8/bits/stl_map.h \
+ /usr/include/c++/4.8/bits/stl_multimap.h ../threads/main.h \
+ ../threads/kernel.h ../machine/interrupt.h ../machine/callback.h \
+ ../machine/stats.h ../threads/alarm.h ../machine/callback.h \
+ ../machine/timer.h
 synch.o: ../threads/synch.cc /usr/include/stdc-predef.h \
  ../lib/copyright.h ../threads/synch.h ../threads/thread.h \
  ../lib/utility.h ../lib/copyright.h ../lib/sysdep.h \
@@ -1120,7 +1137,10 @@ synch.o: ../threads/synch.cc /usr/include/stdc-predef.h \
  /usr/include/i386-linux-gnu/bits/sys_errlist.h /usr/include/string.h \
  ../lib/list.h ../lib/debug.h ../lib/utility.h ../lib/sysdep.h \
  ../lib/list.cc ../threads/main.h ../lib/debug.h ../threads/kernel.h \
- ../threads/scheduler.h ../threads/sleep_thread.h ../machine/interrupt.h \
+ ../threads/scheduler.h ../threads/sleep_thread.h \
+ /usr/include/c++/4.8/map /usr/include/c++/4.8/bits/stl_tree.h \
+ /usr/include/c++/4.8/bits/stl_map.h \
+ /usr/include/c++/4.8/bits/stl_multimap.h ../machine/interrupt.h \
  ../machine/callback.h ../machine/stats.h ../threads/alarm.h \
  ../machine/callback.h ../machine/timer.h
 synchlist.o: ../threads/synchlist.cc /usr/include/stdc-predef.h \
@@ -1212,7 +1232,10 @@ synchlist.o: ../threads/synchlist.cc /usr/include/stdc-predef.h \
  /usr/include/i386-linux-gnu/bits/sys_errlist.h /usr/include/string.h \
  ../lib/list.cc ../threads/synch.h ../threads/thread.h ../lib/utility.h \
  ../lib/sysdep.h ../threads/main.h ../lib/debug.h ../threads/kernel.h \
- ../threads/scheduler.h ../threads/sleep_thread.h ../machine/interrupt.h \
+ ../threads/scheduler.h ../threads/sleep_thread.h \
+ /usr/include/c++/4.8/map /usr/include/c++/4.8/bits/stl_tree.h \
+ /usr/include/c++/4.8/bits/stl_map.h \
+ /usr/include/c++/4.8/bits/stl_multimap.h ../machine/interrupt.h \
  ../machine/callback.h ../machine/stats.h ../threads/alarm.h \
  ../machine/callback.h ../machine/timer.h ../threads/synchlist.cc
 dllist.o: ../threads/dllist.cc /usr/include/stdc-predef.h \
@@ -1391,7 +1414,10 @@ dllist_driver.o: ../threads/dllist_driver.cc /usr/include/stdc-predef.h \
  ../threads/synch.h ../lib/copyright.h ../threads/thread.h \
  ../lib/utility.h ../lib/sysdep.h ../lib/list.h ../lib/debug.h \
  ../lib/list.cc ../threads/main.h ../threads/kernel.h \
- ../threads/scheduler.h ../threads/sleep_thread.h ../machine/interrupt.h \
+ ../threads/scheduler.h ../threads/sleep_thread.h \
+ /usr/include/c++/4.8/map /usr/include/c++/4.8/bits/stl_tree.h \
+ /usr/include/c++/4.8/bits/stl_map.h \
+ /usr/include/c++/4.8/bits/stl_multimap.h ../machine/interrupt.h \
  ../machine/callback.h ../machine/stats.h ../threads/alarm.h \
  ../machine/callback.h ../machine/timer.h
 thread.o: ../threads/thread.cc /usr/include/stdc-predef.h \
@@ -1483,9 +1509,11 @@ thread.o: ../threads/thread.cc /usr/include/stdc-predef.h \
  ../threads/switch.h ../threads/synch.h ../lib/list.h ../lib/debug.h \
  ../lib/utility.h ../lib/sysdep.h ../lib/list.cc ../threads/main.h \
  ../lib/debug.h ../threads/kernel.h ../threads/scheduler.h \
- ../threads/sleep_thread.h ../machine/interrupt.h ../machine/callback.h \
- ../machine/stats.h ../threads/alarm.h ../machine/callback.h \
- ../machine/timer.h
+ ../threads/sleep_thread.h /usr/include/c++/4.8/map \
+ /usr/include/c++/4.8/bits/stl_tree.h /usr/include/c++/4.8/bits/stl_map.h \
+ /usr/include/c++/4.8/bits/stl_multimap.h ../machine/interrupt.h \
+ ../machine/callback.h ../machine/stats.h ../threads/alarm.h \
+ ../machine/callback.h ../machine/timer.h
 sleep_thread.o: ../threads/sleep_thread.cc /usr/include/stdc-predef.h \
  ../threads/sleep_thread.h ../threads/thread.h ../lib/copyright.h \
  ../lib/utility.h ../lib/copyright.h ../lib/sysdep.h \
@@ -1663,7 +1691,10 @@ elevatortest.o: ../machine/elevatortest.cc /usr/include/stdc-predef.h \
  /usr/include/i386-linux-gnu/bits/sys_errlist.h /usr/include/string.h \
  ../lib/list.cc ../threads/synch.h ../threads/thread.h ../lib/sysdep.h \
  ../threads/main.h ../lib/debug.h ../threads/kernel.h \
- ../threads/scheduler.h ../threads/sleep_thread.h ../machine/interrupt.h \
+ ../threads/scheduler.h ../threads/sleep_thread.h \
+ /usr/include/c++/4.8/map /usr/include/c++/4.8/bits/stl_tree.h \
+ /usr/include/c++/4.8/bits/stl_map.h \
+ /usr/include/c++/4.8/bits/stl_multimap.h ../machine/interrupt.h \
  ../machine/stats.h ../threads/alarm.h ../machine/callback.h \
  ../machine/timer.h ../threads/thread.h
 elevator.o: ../machine/elevator.cc /usr/include/stdc-predef.h \
@@ -1755,9 +1786,11 @@ elevator.o: ../machine/elevator.cc /usr/include/stdc-predef.h \
  /usr/include/i386-linux-gnu/bits/sys_errlist.h /usr/include/string.h \
  ../lib/list.cc ../threads/kernel.h ../lib/debug.h ../threads/thread.h \
  ../lib/sysdep.h ../threads/scheduler.h ../threads/sleep_thread.h \
- ../machine/interrupt.h ../machine/stats.h ../threads/alarm.h \
- ../machine/callback.h ../machine/timer.h ../threads/main.h \
- ../threads/kernel.h
+ /usr/include/c++/4.8/map /usr/include/c++/4.8/bits/stl_tree.h \
+ /usr/include/c++/4.8/bits/stl_map.h \
+ /usr/include/c++/4.8/bits/stl_multimap.h ../machine/interrupt.h \
+ ../machine/stats.h ../threads/alarm.h ../machine/callback.h \
+ ../machine/timer.h ../threads/main.h ../threads/kernel.h
 # DEPENDENCIES MUST END AT END OF FILE
 # IF YOU PUT STUFF HERE IT WILL GO AWAY
 # see make depend above

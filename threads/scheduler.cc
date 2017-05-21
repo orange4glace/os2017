@@ -138,8 +138,8 @@ Scheduler::Run (Thread *nextThread, bool finishing)
     ASSERT(kernel->interrupt->getLevel() == IntOff);
 
     if (finishing) {	// mark that we need to delete current thread
-         ASSERT(toBeDestroyed == NULL);
-	 toBeDestroyed = oldThread;
+       ASSERT(toBeDestroyed == NULL);
+	   toBeDestroyed = oldThread;
     }
     
 #ifdef USER_PROGRAM			// ignore until running user programs 
@@ -169,7 +169,7 @@ Scheduler::Run (Thread *nextThread, bool finishing)
     // interrupts are off when we return from switch!
     ASSERT(kernel->interrupt->getLevel() == IntOff);
 
-    DEBUG(dbgThread, "Now in thread: " << oldThread->getName());
+    DEBUG(dbgThread, "!!!!!!!!!!!!!!!1 Now in thread: " << oldThread->getName());
 
     CheckToBeDestroyed();		// check if thread we were running
 					// before this one has finished

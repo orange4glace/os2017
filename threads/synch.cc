@@ -89,7 +89,7 @@ Semaphore::P()
     while (value == 0) { 		// semaphore not available
 	queue->Append(currentThread);	// so go to sleep
 	currentThread->Sleep(FALSE);
-    } 
+    }
     value--; 			// semaphore available, consume its value
    
     // re-enable interrupts
@@ -140,11 +140,16 @@ SelfTestHelper (Semaphore *pong)
 void
 Semaphore::SelfTest()
 {
+    cout << "========= Semaphore SelfTest Started" << endl;
     Thread *helper = new Thread("ping");
 
     ASSERT(value == 0);		// otherwise test won't work!
     ping = new Semaphore("ping", 0);
     helper->Fork((VoidFunctionPtr) SelfTestHelper, this);
+    Interrupt *interrupt = kernel->interrupt;
+    IntStatus oldLevel = interrupt->SetLevel(IntOff);   
+    kernel->currentThread->Sleep(false);
+    (void) interrupt->SetLevel(oldLevel);
     for (int i = 0; i < 10; i++) {
         ping->V();
 	this->P();

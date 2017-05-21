@@ -12,6 +12,7 @@
 #include "sysdep.h"
 #include "synch.h"
 #include "synchlist.h"
+#include "bounded_buffer.h"
 #include "libtest.h"
 #include "elevatortest.h"
 #include "string.h"
@@ -107,13 +108,16 @@ void
 ThreadedKernel::SelfTest() {
    Semaphore *semaphore;
    SynchList<int> *synchList;
+
+   BoundedBuffer* bounded_buffer;
+   bounded_buffer = new BoundedBuffer(10);
+   bounded_buffer->SelfTest();
+   delete bounded_buffer;
    
-   LibSelfTest();		// test library routines
+   //LibSelfTest();		// test library routines
    
    currentThread->SelfTest();	// test thread switching
-
-   DLListSelfTest();
-   
+   /*
    				// test semaphore operation
    semaphore = new Semaphore("test", 0);
    semaphore->SelfTest();
@@ -126,4 +130,5 @@ ThreadedKernel::SelfTest() {
    delete synchList;
 
    ElevatorSelfTest();
+   */
 }

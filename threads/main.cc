@@ -20,6 +20,7 @@
 
 #include "main.h"
 
+#include "synch.h"
 #include "dllist_driver.h"
 
 // global variables

@@ -58,6 +58,7 @@ THREAD_H = ../lib/bitmap.h\
 	../threads/dllist.h\
 	../threads/dll_element.h\
 	../threads/dllist_driver.h\
+	../threads/bounded_buffer.h\
 	../threads/synchlist.h\
 	../threads/thread.h\
 	../threads/sleep_thread.h\
@@ -82,6 +83,7 @@ THREAD_C = ../lib/bitmap.cc\
 	../threads/dllist.cc\
 	../threads/dll_element.cc\
 	../threads/dllist_driver.cc\
+	../threads/bounded_buffer.cc\
 	../threads/thread.cc\
 	../threads/sleep_thread.cc\
 	../machine/elevatortest.cc\
@@ -90,7 +92,7 @@ THREAD_C = ../lib/bitmap.cc\
 THREAD_S = ../threads/switch.s
 
 THREAD_O = bitmap.o debug.o libtest.o sysdep.o interrupt.o stats.o timer.o \
-	alarm.o kernel.o main.o scheduler.o synch.o thread.o elevator.o dllist.o dll_element.o dllist_driver.o sleep_thread.o \
+	alarm.o kernel.o main.o scheduler.o synch.o thread.o elevator.o dllist.o dll_element.o dllist_driver.o bounded_buffer.o sleep_thread.o \
 	elevatortest.o
 
 USERPROG_H = ../userprog/addrspace.h\

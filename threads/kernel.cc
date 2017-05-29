@@ -106,18 +106,19 @@ ThreadedKernel::Run()
 
 void
 ThreadedKernel::SelfTest() {
-   Semaphore *semaphore;
-   SynchList<int> *synchList;
 
    BoundedBuffer* bounded_buffer;
    bounded_buffer = new BoundedBuffer(10);
    bounded_buffer->SelfTest();
    delete bounded_buffer;
    
-   //LibSelfTest();		// test library routines
+   /*
+   Semaphore *semaphore;
+   SynchList<int> *synchList;
+   
+   LibSelfTest();		// test library routines
    
    currentThread->SelfTest();	// test thread switching
-   /*
    				// test semaphore operation
    semaphore = new Semaphore("test", 0);
    semaphore->SelfTest();

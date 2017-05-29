@@ -18,6 +18,7 @@ BoundedBuffer::~BoundedBuffer() {
 int BoundedBuffer::Read(void* data, unsigned int size) {
 	int ret = 0;
 	for (uint i = 0; i < size; i ++) {
+		if (closed_) break;
 		consumer_.P();
 		mutex_.Acquire();
 		if (!closed_) {
@@ -37,6 +38,7 @@ int BoundedBuffer::Read(void* data, unsigned int size) {
 int BoundedBuffer::Write(void* data, unsigned int size) {
 	int ret = 0;
 	for (uint i = 0; i < size; i ++) {
+		if (closed_) break;
 		producer_.P();
 		mutex_.Acquire();
 		if (!closed_) {
@@ -65,7 +67,7 @@ static void BoundedBufferSelfTest_Read(BoundedBuffer* bounded_buffer) {
 	char* data = new char[3];
 	int read_bytes = bounded_buffer->Read(data, 3);
 	cout << "### Bytes read : " << read_bytes << endl;
-	for (int j = 0; j < 3; j ++)
+	for (int j = 0; j < read_bytes; j ++)
 		cout << data[j] << " ";
 	cout << endl;
 
@@ -77,7 +79,7 @@ static void BoundedBufferSelfTest_Write(BoundedBuffer* bounded_buffer) {
 	for (int i = 0; i < 12; i ++) data[i] = test_tmp++;
 	int written_bytes = bounded_buffer->Write(data, 12);
 	cout << "### Bytes written : " << written_bytes << endl;
-	for (int j = 0; j < 12; j ++)
+	for (int j = 0; j < written_bytes; j ++)
 		cout << data[j] << " ";
 	cout << endl;
 
@@ -101,6 +103,7 @@ void BoundedBuffer::SelfTest() {
 
     for (int i = 0; i < 5 * 2; i ++) {
 		bounded_buffer_test_semaphore.P();
+		if (i == 4) Close();
 		cout << "###################### Thread ended." << endl;
     }
 }
